@@ -8,6 +8,7 @@ import 'package:mr_recipe/ui/navigation/routes.dart';
 import 'package:mr_recipe/ui/screens/form/bloc/recipe_form_bloc.dart';
 import 'package:mr_recipe/ui/theme/theme.dart';
 
+part 'helpers/form_helpers.dart';
 part 'widgets/recipe_form.dart';
 part 'widgets/ingredient_field.dart';
 part 'widgets/save_button.dart';
@@ -91,37 +92,15 @@ class _FormViewState extends State<FormView> {
         Navigator.of(context).pop();
         break;
       case RecipeSavedState():
-        _showCreateModalSuccess();
+        RecipeFormHelpers.showCreateModalSuccess(context);
         break;
       case RecipeUpdatedState():
-        _showUpdateModalSuccess();
+        RecipeFormHelpers.showUpdateModalSuccess(context, widget.recipeId);
         break;
       case FormFailureState():
         MrSnackBar.showError(context, message: state.message);
         break;
       default:
     }
-  }
-
-  void _showCreateModalSuccess() {
-    RecipeFormSuccessModal.show(
-      context,
-      title: MrStrings.yourRecipeWasCreatedSuccessfully,
-      onBack: () => Navigator.of(context).popUntil(
-        ModalRoute.withName(AppRoutes.home),
-      ),
-    );
-  }
-
-  void _showUpdateModalSuccess() {
-    RecipeFormSuccessModal.show(
-      context,
-      title: MrStrings.yourRecipeWasUpdatedSuccessfully,
-      onBack: () => Navigator.of(context).pushNamedAndRemoveUntil(
-        AppRoutes.detail,
-        ModalRoute.withName(AppRoutes.home),
-        arguments: widget.recipeId,
-      ),
-    );
   }
 }

@@ -19,7 +19,10 @@ class RecipeRowButtons extends StatelessWidget {
         ),
         IconButton.filled(
           color: Theme.of(context).colorScheme.onPrimary,
-          onPressed: () => _editRecipe(context),
+          onPressed: () => RecipeDetailHelpers.navigateToEdit(
+            context,
+            recipeId,
+          ),
           icon: const Icon(Icons.edit_outlined),
         ),
       ],
@@ -30,14 +33,6 @@ class RecipeRowButtons extends StatelessWidget {
     final detailBloc = BlocInjector.of<RecipeDetailBloc>(context);
     detailBloc.events.add(
       DeleteRecipeEvent(recipeId),
-    );
-  }
-
-  void _editRecipe(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      AppRoutes.form,
-      arguments: recipeId,
     );
   }
 }

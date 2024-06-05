@@ -106,7 +106,6 @@ class RecipeFormBloc {
           ),
         );
         break;
-
       case RecipeFormField.preparationTime:
         _output.add(
           FormDataChangedState(
@@ -116,7 +115,6 @@ class RecipeFormBloc {
           ),
         );
         break;
-
       case RecipeFormField.cookingTime:
         _output.add(
           FormDataChangedState(

@@ -7,6 +7,7 @@ import 'package:mr_recipe/ui/navigation/routes.dart';
 import 'package:mr_recipe/ui/screens/detail/bloc/recipe_detail_bloc.dart';
 import 'package:mr_recipe/ui/theme/theme.dart';
 
+part 'helpers/detail_helpers.dart';
 part 'widgets/recipe_content.dart';
 part 'widgets/error_message.dart';
 part 'widgets/row_buttons.dart';
@@ -93,16 +94,9 @@ class _DetailViewState extends State<DetailView> {
         Navigator.pop(context);
         break;
       case RecipeDeletedState():
-        _navigateToHome();
+        RecipeDetailHelpers.navigateToHome(context);
         break;
       default:
     }
-  }
-
-  void _navigateToHome() {
-    Navigator.popUntil(
-      context,
-      ModalRoute.withName(AppRoutes.home),
-    );
   }
 }
