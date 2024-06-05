@@ -77,11 +77,7 @@ class HomeBloc {
   }
 
   void _onUnwatchRecipesEvent(UnwatchRecipesEvent event) async {
-    final failureOrClosed = await _closeRecipeWatcherUseCase();
-    failureOrClosed.fold(
-      () {},
-      (failure) => _output.add(HomeFailureState(failure.message)),
-    );
+    await _closeRecipeWatcherUseCase();
   }
 
   void dispose() {
