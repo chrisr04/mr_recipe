@@ -59,10 +59,7 @@ class RecipeFormBloc {
   void _onInitializeFormEvent(
     InitializeFormEvent event,
   ) async {
-    if (event.recipeId.isEmpty) {
-      _output.add(const FormInitialState(RecipeFormStateData()));
-      return;
-    }
+    if (event.recipeId.isEmpty) return;
 
     final failureOrRecipe = await _getRecipeByIdUseCase(event.recipeId);
 

@@ -17,6 +17,7 @@ class RecipeForm extends StatelessWidget {
     final formBloc = BlocInjector.of<RecipeFormBloc>(context);
     return StreamBuilder(
       stream: formBloc.stream,
+      initialData: formBloc.state,
       builder: (context, snapshot) {
         if (snapshot.data == null) return const SliverToBoxAdapter();
         final state = snapshot.data!;
