@@ -1,0 +1,99 @@
+[
+    {
+        "id": "ASdE435",
+        "name": "Ajiaco santafereño",
+        "description": "El ajiaco bogotano o santafereño es una sopa típica de la zona de Bogotá, Cundinamarca, Colombia.",
+        "preparation_time": 20,
+        "cooking_time": 41,
+        "ingredients": [
+            "4 tazas de agua (1000 ml)",
+            "1 sobre CALDO DE GALLINA",
+            "1 pechuga de pollo pequeña sin piel pero con el hueso (400 g)",
+            "1/4 de libra de papa criolla pelada y cortada en rodajas (125 g)",
+            "1/4 de libra de papa pastusa pelada y cortada en rodajas (125 g)",
+            "3 mazorcas partidas a la mitad (380 g)",
+            "1/2 atado de guascas (13 g)",
+            "1 cucharada de alcaparras (20 g)",
+            "1 aguacate mediano partido en 4 porciones (300 g)"
+        ]
+    },
+    {
+        "id": "3sVAaQ8W832",
+        "name": "Bandeja paisa",
+        "description": "",
+        "preparation_time": 20,
+        "cooking_time": 50,
+        "ingredients": [
+            "1 1/2 cucharadas de aceite (21 g)",
+            "2 tallos de cebolla larga finamente picada (30 g)",
+            "2 tomates maduros sin piel y finamente picados (240 g)",
+            "1 sobre de CALDO CON COSTILLA MAGGI DESMENUZADO (9 g)",
+            "3 tazas de agua (750 ml)",
+            "1/2 libra de fríjoles bola roja remojados desde la noche anterior (250 g)",
+            "1 zanahoria mediana, entera y pelada (140 g)",
+            "1/4 libra de carne molida magra (125 g)",
+            "1/2 libra de arroz blanco cocinado (250 g)",
+            "1/4 de libra de tocino crocante cortado en 4 porciones (125 g)",
+            "4 chorizos tipo coctel previamente cocinados y dorados (120 g)",
+            "4 huevos fritos (200 g)",
+            "1 aguacate partido en 4 porciones (110 g)",
+            "4 arepas pequeñas redondas (80 g)",
+            "4 tajadas de plátano maduro fritas (80 g)"
+        ]
+    },
+    {
+        "id": "xks23basls",
+        "name": "Lasaña mixta",
+        "description": "",
+        "preparation_time": 20,
+        "cooking_time": 60,
+        "ingredients": [
+            "1 cucharada de aceite (14 ml)",
+            "1 libra de carne molida magra (500 g)",
+            "1 sobre de BASE PARA SALSA BOLOÑESA MAGGI",
+            "1 1/2 tazas de agua",
+            "1 pechuga de pollo sin piel cocinada y desmechada (453 g)",
+            "1 sobre de BASE PARA SALSA BECHAMEL MAGGI®",
+            "1 taza de agua fría (240 ml)",
+            "1 taza de leche (240 ml)",
+            "1 caja de pasta para lasaña (500 g)",
+            "8 tajadas de queso mozzarella (128 g)",
+            "8 cucharadas de queso parmesano (40 g)"
+        ]
+    },
+    {
+        "id": "Ls12Ysdf",
+        "name": "Pizza napolitana",
+        "description": "",
+        "preparation_time": 15,
+        "cooking_time": 20,
+        "ingredients": [
+            "1 tomate (123 g)",
+            "2 cucharadas de CREMA DELECHE NESTLÉ (30 g)",
+            "1/2 cucharadita de SAZONADOR NATURISIMO MAGGI (3 g)",
+            "1 tortilla de trigo XL (52 g)",
+            "1/4 de libra de queso mozzarella rallado (125 g)",
+            "1/2 cucharadita de orégano seco (1 g)",
+            "8 hojas de albahaca (4 g)",
+            "1 cucharada de aceite de oliva (14 g)"
+        ]
+    },
+    {
+        "id": "sllgs34nsd2",
+        "name": "Salmón al horno",
+        "description": "",
+        "preparation_time": 10,
+        "cooking_time": 23,
+        "ingredients": [
+            "4 porciones de salmón (620 g)",
+            "1 cucharadita de SAZONADOR NATURISIMO MAGGI® (3 g)",
+            "1 cucharada de aceite (14 g)",
+            "2 tazas de lechuga cortada en trozos pequeños (114 g)",
+            "1 pepino europeo cortado en láminas delgadas (100 g)",
+            "1/2 cebolla cabezona cortada en finas julianas (55 g)",
+            "2 cucharadas de aceite de oliva (28 g)",
+            "Zumo de 1 limón (48 ml)",
+            "1 libra de arroz integral cocinado (500 g)"
+        ]
+    }
+]
