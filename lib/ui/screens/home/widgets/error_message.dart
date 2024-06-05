@@ -1,7 +1,7 @@
 part of '../home_screen.dart';
 
-class HomeErrorMessage extends StatelessWidget {
-  const HomeErrorMessage({
+class ErrorMessage extends StatelessWidget {
+  const ErrorMessage({
     super.key,
     required this.message,
   });

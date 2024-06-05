@@ -26,7 +26,7 @@ class RecipeContent extends StatelessWidget {
               Expanded(
                 child: MrTextHeading5(recipe.name),
               ),
-              RecipeRowButtons(
+              RowButtons(
                 recipeId: recipe.id,
               ),
             ],
@@ -53,72 +53,6 @@ class RecipeContent extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class RecipeProperty extends StatelessWidget {
-  const RecipeProperty({
-    super.key,
-    required this.label,
-    required this.content,
-  });
-
-  final String label;
-  final String content;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        MrTextMedium(
-          label,
-          weight: FontWeight.w600,
-        ),
-        const MrSpacingXS(),
-        MrTextMedium(content),
-      ],
-    );
-  }
-}
-
-class RecipeIngredients extends StatelessWidget {
-  const RecipeIngredients({super.key, required this.ingredients});
-
-  final List<String> ingredients;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const MrTextMedium(
-          MrStrings.ingredients,
-          weight: FontWeight.w600,
-        ),
-        const MrSpacingXS(),
-        for (final ingredient in ingredients)
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: MrSpacing.sm,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.check,
-                  color: Theme.of(context).colorScheme.success,
-                  size: 22.0,
-                ),
-                const MrSpacingXS(axis: MrSpacingAxis.x),
-                Expanded(
-                  child: MrTextMedium(ingredient),
-                ),
-              ],
-            ),
-          ),
-      ],
     );
   }
 }

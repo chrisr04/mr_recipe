@@ -1,7 +1,7 @@
 part of '../detail_screen.dart';
 
-class RecipeRowButtons extends StatelessWidget {
-  const RecipeRowButtons({super.key, required this.recipeId});
+class RowButtons extends StatelessWidget {
+  const RowButtons({super.key, required this.recipeId});
 
   final String recipeId;
 
@@ -19,7 +19,7 @@ class RecipeRowButtons extends StatelessWidget {
         ),
         IconButton.filled(
           color: Theme.of(context).colorScheme.onPrimary,
-          onPressed: () => RecipeDetailHelpers.navigateToEdit(
+          onPressed: () => DetailHelpers.navigateToEdit(
             context,
             recipeId,
           ),

@@ -1,7 +1,7 @@
 export 'spacing/spacing.dart';
 export 'text/text.dart';
-export 'inputs/inputs.dart';
-export 'buttons/buttons.dart';
+export 'text_field/text_field.dart';
+export 'button/button.dart';
 export 'snackbar/snackbar.dart';
-export 'modals/modals.dart';
-export 'appbar/default_app_bar.dart';
+export 'modal/modal.dart';
+export 'appbar/appbar.dart';

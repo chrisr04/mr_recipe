@@ -1,6 +1,6 @@
 part of '../detail_screen.dart';
 
-class RecipeDetailHelpers {
+class DetailHelpers {
   static void navigateToHome(BuildContext context) {
     Navigator.popUntil(
       context,

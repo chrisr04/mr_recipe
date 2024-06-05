@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-part 'colors.dart';
-part 'typography.dart';
+part 'mr_colors.dart';
+part 'mr_typography.dart';
 
 final theme = ThemeData(
   primaryColor: MrColors.deepOrange,

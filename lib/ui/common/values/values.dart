@@ -1,2 +1,2 @@
-export 'assets.dart';
-export 'strings.dart';
+export 'mr_assets.dart';
+export 'mr_strings.dart';

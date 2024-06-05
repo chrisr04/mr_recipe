@@ -1,8 +1,8 @@
 part of '../form_screen.dart';
 
-class RecipeFormHelpers {
+class FormHelpers {
   static void showCreateModalSuccess(BuildContext context) {
-    RecipeFormSuccessModal.show(
+    FormSuccessModal.show(
       context,
       title: MrStrings.yourRecipeWasCreatedSuccessfully,
       onBack: () => Navigator.of(context).popUntil(
@@ -12,7 +12,7 @@ class RecipeFormHelpers {
   }
 
   static void showUpdateModalSuccess(BuildContext context, String recipeId) {
-    RecipeFormSuccessModal.show(
+    FormSuccessModal.show(
       context,
       title: MrStrings.yourRecipeWasUpdatedSuccessfully,
       onBack: () => Navigator.of(context).pushNamedAndRemoveUntil(

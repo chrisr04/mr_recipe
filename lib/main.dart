@@ -12,7 +12,7 @@ class MainApp extends StatelessWidget {
     return DependencyInjector(
       child: MaterialApp(
         initialRoute: AppRoutes.home,
-        onGenerateRoute: onGenerateRoutes,
+        onGenerateRoute: RouteGenerator.onGenerateRoutes,
         theme: theme,
       ),
     );

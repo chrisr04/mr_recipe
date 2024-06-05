@@ -105,7 +105,7 @@ class RecipeForm extends StatelessWidget {
                   ),
                   const MrSpacingS(),
                   for (final ingredientId in ingredientIds)
-                    IngredientField(
+                    FormIngredientField(
                       key: ValueKey(ingredientId),
                       initialValue: state.data.ingredients[ingredientId],
                       ingredientId: ingredientId,
