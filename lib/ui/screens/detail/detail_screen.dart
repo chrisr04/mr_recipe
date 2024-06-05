@@ -44,9 +44,7 @@ class _DetailViewState extends State<DetailView> {
 
   @override
   void didChangeDependencies() {
-    if (_listenerSubscription != null) return;
-
-    _listenerSubscription = _detailBloc.stream.listen(_listenDetailBloc);
+    _listenerSubscription ??= _detailBloc.stream.listen(_listenDetailBloc);
     super.didChangeDependencies();
   }
 

@@ -47,9 +47,7 @@ class _FormViewState extends State<FormView> {
 
   @override
   void didChangeDependencies() {
-    if (_listenerSubscription != null) return;
-
-    _listenerSubscription = _formBloc.stream.listen(_listenFormBloc);
+    _listenerSubscription ??= _formBloc.stream.listen(_listenFormBloc);
     super.didChangeDependencies();
   }
 
