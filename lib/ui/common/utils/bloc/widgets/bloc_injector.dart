@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mr_recipe/ui/common/common.dart';
 
-class BlocInjector<T extends Bloc> extends StatefulWidget {
+class BlocInjector<B extends Bloc> extends StatefulWidget {
   const BlocInjector({
     super.key,
     required this.bloc,
@@ -10,21 +10,21 @@ class BlocInjector<T extends Bloc> extends StatefulWidget {
   });
 
   final Widget child;
-  final T bloc;
+  final B bloc;
   final bool autoClose;
 
-  static T of<T>(BuildContext context, {bool listen = false}) =>
-      _BlocInherited.of<T>(context, listen);
+  static B of<B extends Bloc>(BuildContext context, {bool listen = false}) =>
+      _BlocInherited.of<B>(context, listen);
 
   @override
-  State<BlocInjector> createState() => _BlocInjectorState<T>();
+  State<BlocInjector> createState() => _BlocInjectorState<B>();
 }
 
-class _BlocInjectorState<T extends Bloc> extends State<BlocInjector> {
+class _BlocInjectorState<B extends Bloc> extends State<BlocInjector> {
   @override
   Widget build(BuildContext context) {
-    return _BlocInherited<T>(
-      bloc: widget.bloc as T,
+    return _BlocInherited<B>(
+      bloc: widget.bloc as B,
       child: widget.child,
     );
   }
@@ -36,20 +36,20 @@ class _BlocInjectorState<T extends Bloc> extends State<BlocInjector> {
   }
 }
 
-class _BlocInherited<T> extends InheritedWidget {
+class _BlocInherited<B extends Bloc> extends InheritedWidget {
   const _BlocInherited({
     super.key,
     required this.bloc,
     required super.child,
   });
 
-  final T bloc;
+  final B bloc;
 
-  static T of<T>(BuildContext context, bool listen) => listen
-      ? context.dependOnInheritedWidgetOfExactType<_BlocInherited<T>>()!.bloc
-      : context.findAncestorWidgetOfExactType<_BlocInherited<T>>()!.bloc;
+  static B of<B extends Bloc>(BuildContext context, bool listen) => listen
+      ? context.dependOnInheritedWidgetOfExactType<_BlocInherited<B>>()!.bloc
+      : context.findAncestorWidgetOfExactType<_BlocInherited<B>>()!.bloc;
 
   @override
-  bool updateShouldNotify(_BlocInherited<T> oldWidget) =>
+  bool updateShouldNotify(_BlocInherited<B> oldWidget) =>
       oldWidget.bloc != bloc;
 }
