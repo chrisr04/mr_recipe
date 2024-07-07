@@ -4,7 +4,7 @@ import 'package:mr_recipe/ui/common/utils/injector/services/singleton_service.da
 
 class AsyncSingletonService<T> extends Service<T> {
   AsyncSingletonService({
-    super.onRemove,
+    super.onDispose,
     required this.create,
   });
 
@@ -12,6 +12,6 @@ class AsyncSingletonService<T> extends Service<T> {
 
   Future<SingletonService<T>> resolve() async => SingletonService<T>(
         instance: await create(),
-        onRemove: onRemove,
+        onDispose: onDispose,
       );
 }

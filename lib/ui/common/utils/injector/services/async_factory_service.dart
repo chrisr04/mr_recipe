@@ -3,7 +3,7 @@ import 'package:mr_recipe/ui/common/utils/injector/services/service.dart';
 
 class AsyncFactoryService<T> extends Service<T> {
   AsyncFactoryService({
-    super.onRemove,
+    super.onDispose,
     required this.create,
   });
 

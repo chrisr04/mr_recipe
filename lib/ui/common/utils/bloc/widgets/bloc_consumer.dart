@@ -13,10 +13,10 @@ class BlocConsumer<B extends Bloc, S> extends StatelessWidget {
     this.buildWhen,
   });
 
-  final BlocListenerFunction<S> listener;
-  final BlocCondition<S>? listenWhen;
-  final BlocBuilderFunction<S> builder;
-  final BlocCondition<S>? buildWhen;
+  final BlocListenerHandler<S> listener;
+  final BloBuildCondition<S>? listenWhen;
+  final BlocWidgetBuilder<S> builder;
+  final BloBuildCondition<S>? buildWhen;
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:mr_recipe/ui/common/utils/injector/services/service.dart';
 
 class LazySingletonService<T> extends Service<T> {
   LazySingletonService({
-    super.onRemove,
+    super.onDispose,
     required this.create,
   });
 

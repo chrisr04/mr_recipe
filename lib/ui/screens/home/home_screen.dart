@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/domain/domain.dart';
 import 'package:mr_recipe/ui/common/common.dart';
+import 'package:mr_recipe/ui/common/utils/bloc/widgets/bloc_injector.dart';
 import 'package:mr_recipe/ui/navigation/app_routes.dart';
 import 'package:mr_recipe/ui/screens/home/bloc/home_bloc.dart';
 
@@ -19,9 +20,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeBloc = HomeBlocDependency.of(context);
     return BlocInjector<HomeBloc>(
-      bloc: homeBloc
+      bloc: inject<HomeBloc>()
         ..add(const LoadRecipesEvent())
         ..add(const WatchRecipesEvent()),
       child: const HomeView(),

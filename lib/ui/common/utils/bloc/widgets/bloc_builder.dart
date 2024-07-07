@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/ui/common/utils/bloc/bloc.dart';
 import 'package:mr_recipe/ui/common/utils/bloc/types/bloc_types.dart';
+import 'package:mr_recipe/ui/common/utils/bloc/widgets/bloc_injector.dart';
 
 class BlocBuilder<B extends Bloc, S> extends StatefulWidget {
   const BlocBuilder({
@@ -11,8 +11,8 @@ class BlocBuilder<B extends Bloc, S> extends StatefulWidget {
     this.buildWhen,
   });
 
-  final BlocBuilderFunction<S> builder;
-  final BlocCondition<S>? buildWhen;
+  final BlocWidgetBuilder<S> builder;
+  final BloBuildCondition<S>? buildWhen;
 
   @override
   State<BlocBuilder<B, S>> createState() => _BlocBuilderState<B, S>();

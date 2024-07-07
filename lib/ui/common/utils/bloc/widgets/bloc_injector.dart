@@ -6,15 +6,15 @@ class BlocInjector<T> extends StatefulWidget {
     super.key,
     required this.bloc,
     required this.child,
-    this.closeOnDispose = true,
+    this.autoClose = true,
   });
 
   final Widget child;
   final T bloc;
-  final bool closeOnDispose;
+  final bool autoClose;
 
   static T of<T>(BuildContext context, {bool listen = false}) =>
-      InjectorInherited.of<T>(context, listen: listen);
+      _BlocInherited.of<T>(context, listen: listen);
 
   @override
   State<BlocInjector> createState() => _BlocInjectorState<T>();
@@ -23,7 +23,7 @@ class BlocInjector<T> extends StatefulWidget {
 class _BlocInjectorState<T> extends State<BlocInjector> {
   @override
   Widget build(BuildContext context) {
-    return InjectorInherited<T>(
+    return _BlocInherited<T>(
       bloc: widget.bloc,
       child: widget.child,
     );
@@ -31,13 +31,13 @@ class _BlocInjectorState<T> extends State<BlocInjector> {
 
   @override
   void dispose() {
-    if (widget.closeOnDispose) (widget.bloc as Bloc).close();
+    if (widget.autoClose) (widget.bloc as Bloc).close();
     super.dispose();
   }
 }
 
-class InjectorInherited<T> extends InheritedWidget {
-  const InjectorInherited({
+class _BlocInherited<T> extends InheritedWidget {
+  const _BlocInherited({
     super.key,
     required this.bloc,
     required super.child,
@@ -46,10 +46,10 @@ class InjectorInherited<T> extends InheritedWidget {
   final T bloc;
 
   static T of<T>(BuildContext context, {bool listen = false}) => listen
-      ? context.dependOnInheritedWidgetOfExactType<InjectorInherited<T>>()!.bloc
-      : context.findAncestorWidgetOfExactType<InjectorInherited<T>>()!.bloc;
+      ? context.dependOnInheritedWidgetOfExactType<_BlocInherited<T>>()!.bloc
+      : context.findAncestorWidgetOfExactType<_BlocInherited<T>>()!.bloc;
 
   @override
-  bool updateShouldNotify(InjectorInherited<T> oldWidget) =>
+  bool updateShouldNotify(_BlocInherited<T> oldWidget) =>
       oldWidget.bloc != bloc;
 }

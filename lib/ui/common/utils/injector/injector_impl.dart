@@ -38,10 +38,10 @@ class _InjectorImpl implements Injector {
   void addSingleton<T>(
     T instance, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   }) {
     final service = SingletonService<T>(
-      onRemove: onRemove,
+      onDispose: onDispose,
       instance: instance,
     );
 
@@ -57,10 +57,10 @@ class _InjectorImpl implements Injector {
   void addAsyncSingleton<T>(
     AsyncServiceCreator<T> create, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   }) {
     final service = AsyncSingletonService<T>(
-      onRemove: onRemove,
+      onDispose: onDispose,
       create: create,
     );
 
@@ -76,10 +76,10 @@ class _InjectorImpl implements Injector {
   void addLazySingleton<T>(
     ServiceCreator<T> create, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   }) {
     final service = LazySingletonService<T>(
-      onRemove: onRemove,
+      onDispose: onDispose,
       create: create,
     );
 
@@ -95,10 +95,10 @@ class _InjectorImpl implements Injector {
   void addFactory<T>(
     ServiceCreator<T> create, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   }) {
     final service = FactoryService(
-      onRemove: onRemove,
+      onDispose: onDispose,
       create: create,
     );
 
@@ -114,10 +114,10 @@ class _InjectorImpl implements Injector {
   void addAsyncFactory<T>(
     AsyncServiceCreator<T> create, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   }) {
     final service = AsyncFactoryService(
-      onRemove: onRemove,
+      onDispose: onDispose,
       create: create,
     );
 
@@ -147,16 +147,16 @@ class _InjectorImpl implements Injector {
   }
 
   @override
-  void remove<T>(T instance, {String? name}) {
-    Service<T>? serviceRemoved;
+  void dispose<T>(T instance, {String? name}) async {
+    Service<T>? serviceDisposed;
     if (name != null && _namedServices.containsKey(name)) {
-      serviceRemoved = _namedServices.remove(name) as Service<T>;
+      serviceDisposed = _namedServices.remove(name) as Service<T>;
     } else if (_typedServices.containsKey(T)) {
-      serviceRemoved = _typedServices.remove(T) as Service<T>;
+      serviceDisposed = _typedServices.remove(T) as Service<T>;
     }
 
-    if (serviceRemoved != null && serviceRemoved.onRemove != null) {
-      serviceRemoved.onRemove!(instance);
+    if (serviceDisposed != null && serviceDisposed.onDispose != null) {
+      serviceDisposed.onDispose!(instance);
     }
   }
 

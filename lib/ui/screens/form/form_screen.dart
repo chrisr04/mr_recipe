@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/domain/domain.dart';
 import 'package:mr_recipe/ui/common/common.dart';
+import 'package:mr_recipe/ui/common/utils/bloc/widgets/bloc_injector.dart';
 import 'package:mr_recipe/ui/navigation/app_routes.dart';
 import 'package:mr_recipe/ui/screens/form/bloc/recipe_form_bloc.dart';
 import 'package:mr_recipe/ui/theme/theme.dart';
@@ -23,9 +24,8 @@ class FormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formBloc = RecipeFormBlocDependency.of(context);
     return BlocInjector<RecipeFormBloc>(
-      bloc: formBloc..add(InitializeFormEvent(recipeId)),
+      bloc: inject<RecipeFormBloc>()..add(InitializeFormEvent(recipeId)),
       child: FormView(
         recipeId: recipeId,
       ),

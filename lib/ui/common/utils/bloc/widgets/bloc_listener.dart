@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/ui/common/utils/bloc/bloc.dart';
 import 'package:mr_recipe/ui/common/utils/bloc/types/bloc_types.dart';
+import 'package:mr_recipe/ui/common/utils/bloc/widgets/bloc_injector.dart';
 
 class BlocListener<B extends Bloc, S> extends StatefulWidget {
   const BlocListener({
@@ -12,8 +12,8 @@ class BlocListener<B extends Bloc, S> extends StatefulWidget {
     this.child,
   });
 
-  final BlocListenerFunction<S> listener;
-  final BlocCondition<S>? listenWhen;
+  final BlocListenerHandler<S> listener;
+  final BloBuildCondition<S>? listenWhen;
   final Widget? child;
 
   @override

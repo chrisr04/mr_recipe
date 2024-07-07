@@ -5,8 +5,8 @@ typedef Emitter<S> = void Function(S state);
 
 typedef EventHandler<E, S> = FutureOr<void> Function(E event, Emitter<S> emit);
 
-typedef BlocListenerFunction<S> = void Function(BuildContext context, S state);
+typedef BlocListenerHandler<S> = void Function(BuildContext context, S state);
 
-typedef BlocBuilderFunction<S> = Widget Function(BuildContext context, S state);
+typedef BlocWidgetBuilder<S> = Widget Function(BuildContext context, S state);
 
-typedef BlocCondition<S> = bool Function(S previous, S current);
+typedef BloBuildCondition<S> = bool Function(S previous, S current);

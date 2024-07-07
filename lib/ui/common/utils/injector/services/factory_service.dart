@@ -3,7 +3,7 @@ import 'package:mr_recipe/ui/common/utils/injector/services/service.dart';
 
 class FactoryService<T> extends Service<T> {
   FactoryService({
-    super.onRemove,
+    super.onDispose,
     required this.create,
   });
 

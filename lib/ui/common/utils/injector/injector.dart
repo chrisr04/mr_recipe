@@ -11,38 +11,38 @@ abstract class Injector {
   void addSingleton<T>(
     T instance, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   });
 
   void addAsyncSingleton<T>(
     AsyncServiceCreator<T> create, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   });
 
   void addLazySingleton<T>(
     ServiceCreator<T> create, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   });
 
   void addFactory<T>(
     ServiceCreator<T> create, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   });
 
   void addAsyncFactory<T>(
     AsyncServiceCreator<T> create, {
     String? name,
-    ServiceRemoved<T>? onRemove,
+    ServiceDisposer<T>? onDispose,
   });
 
   Future<T> getAsync<T>({String? name});
 
   Future<void> resolveAsync();
 
-  void remove<T>(T instance, {String? name});
+  void dispose<T>(T instance, {String? name});
 
   void clear();
 }
