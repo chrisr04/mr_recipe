@@ -5,15 +5,8 @@ class HomeRecipeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final homeBloc = BlocInjector.of<HomeBloc>(context);
-
-    return StreamBuilder(
-      stream: homeBloc.stream,
-      initialData: homeBloc.state,
-      builder: (context, snapshot) {
-        if (snapshot.data == null) return const SizedBox.shrink();
-        final state = snapshot.data!;
-
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
         return switch (state) {
           HomeLoadedState() => state.recipes.isNotEmpty
               ? Expanded(

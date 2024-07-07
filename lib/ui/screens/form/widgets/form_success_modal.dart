@@ -15,7 +15,7 @@ class FormSuccessModal {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
-          surfaceTintColor: Theme.of(context).colorScheme.background,
+          surfaceTintColor: Theme.of(context).colorScheme.surface,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: MrSpacing.md,

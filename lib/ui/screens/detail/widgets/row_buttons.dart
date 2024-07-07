@@ -31,7 +31,7 @@ class RowButtons extends StatelessWidget {
 
   void _deleteRecipe(BuildContext context) {
     final detailBloc = BlocInjector.of<RecipeDetailBloc>(context);
-    detailBloc.events.add(
+    detailBloc.add(
       DeleteRecipeEvent(recipeId),
     );
   }

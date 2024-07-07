@@ -22,8 +22,8 @@ class HomeScreen extends StatelessWidget {
     final homeBloc = HomeBlocDependency.of(context);
     return BlocInjector<HomeBloc>(
       bloc: homeBloc
-        ..events.add(const LoadRecipesEvent())
-        ..events.add(const WatchRecipesEvent()),
+        ..add(const LoadRecipesEvent())
+        ..add(const WatchRecipesEvent()),
       child: const HomeView(),
     );
   }

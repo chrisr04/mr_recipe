@@ -15,8 +15,6 @@ final theme = ThemeData(
     onSecondary: MrColors.white,
     error: MrColors.imperialRed,
     onError: MrColors.white,
-    background: MrColors.white,
-    onBackground: MrColors.black,
     surface: MrColors.white,
     onSurface: MrColors.black,
     tertiary: MrColors.camel,

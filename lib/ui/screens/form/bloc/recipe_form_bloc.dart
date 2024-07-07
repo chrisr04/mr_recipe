@@ -1,76 +1,44 @@
-import 'dart:async';
 import 'package:mr_recipe/domain/domain.dart';
+import 'package:mr_recipe/ui/common/common.dart';
 
 part 'recipe_form_event.dart';
 part 'recipe_form_state.dart';
 
-class RecipeFormBloc {
+class RecipeFormBloc extends Bloc<RecipeFormEvent, RecipeFormState> {
   RecipeFormBloc(
     this._getRecipeByIdUseCase,
     this._createRecipeUseCase,
     this._updateRecipeUseCase,
-  ) {
-    _output.add(state);
-    _output.stream.listen(_stateHandler);
-    _input.stream.listen(_eventHandler);
+  ) : super(const FormInitialState(RecipeFormStateData())) {
+    register<InitializeFormEvent>(_onInitializeFormEvent);
+    register<ChangeRecipeDataEvent>(_onChangeRecipeDataEvent);
+    register<ChangeIngredientEvent>(_onChangeIngredientEvent);
+    register<AddIngredientEvent>(_onAddIngredientEvent);
+    register<DeleteIngredientEvent>(_onDeleteIngredientEvent);
+    register<SaveRecipeEvent>(_onSaveRecipeEvent);
+    register<UpdateRecipeEvent>(_onUpdateRecipeEvent);
   }
 
   final GetRecipeByIdUseCase _getRecipeByIdUseCase;
   final CreateRecipeUseCase _createRecipeUseCase;
   final UpdateRecipeUseCase _updateRecipeUseCase;
 
-  RecipeFormState state = const FormInitialState(RecipeFormStateData());
-  final _input = StreamController<RecipeFormEvent>();
-  final _output = StreamController<RecipeFormState>.broadcast();
-
-  Stream<RecipeFormState> get stream => _output.stream;
-  StreamSink<RecipeFormEvent> get events => _input.sink;
-
-  void _stateHandler(RecipeFormState newState) {
-    state = newState;
-  }
-
-  void _eventHandler(RecipeFormEvent event) {
-    switch (event) {
-      case InitializeFormEvent():
-        _onInitializeFormEvent(event);
-        break;
-      case ChangeRecipeDataEvent():
-        _onChangeRecipeDataEvent(event);
-        break;
-      case ChangeIngredientEvent():
-        _onChangeIngredientEvent(event);
-        break;
-      case AddIngredientEvent():
-        _onAddIngredientEvent(event);
-        break;
-      case DeleteIngredientEvent():
-        _onDeleteIngredientEvent(event);
-        break;
-      case SaveRecipeEvent():
-        _onSaveRecipeEvent(event);
-        break;
-      case UpdateRecipeEvent():
-        _onUpdateRecipeEvent(event);
-      default:
-    }
-  }
-
   void _onInitializeFormEvent(
     InitializeFormEvent event,
+    Emitter<RecipeFormState> emit,
   ) async {
     if (event.recipeId.isEmpty) return;
 
     final failureOrRecipe = await _getRecipeByIdUseCase(event.recipeId);
 
     failureOrRecipe.fold(
-      (failure) => _output.add(
+      (failure) => emit(
         FormFailureState(
           state.data,
           message: failure.message,
         ),
       ),
-      (recipe) => _output.add(
+      (recipe) => emit(
         FormDataChangedState(
           state.data.copyWith(
             name: recipe.name,
@@ -86,10 +54,11 @@ class RecipeFormBloc {
 
   void _onChangeRecipeDataEvent(
     ChangeRecipeDataEvent event,
+    Emitter<RecipeFormState> emit,
   ) {
     switch (event.field) {
       case RecipeFormField.name:
-        _output.add(
+        emit(
           FormDataChangedState(
             state.data.copyWith(
               name: event.value,
@@ -98,7 +67,7 @@ class RecipeFormBloc {
         );
         break;
       case RecipeFormField.description:
-        _output.add(
+        emit(
           FormDataChangedState(
             state.data.copyWith(
               description: event.value,
@@ -107,7 +76,7 @@ class RecipeFormBloc {
         );
         break;
       case RecipeFormField.preparationTime:
-        _output.add(
+        emit(
           FormDataChangedState(
             state.data.copyWith(
               preparationTime: event.value,
@@ -116,7 +85,7 @@ class RecipeFormBloc {
         );
         break;
       case RecipeFormField.cookingTime:
-        _output.add(
+        emit(
           FormDataChangedState(
             state.data.copyWith(
               cookingTime: event.value,
@@ -129,10 +98,11 @@ class RecipeFormBloc {
 
   void _onChangeIngredientEvent(
     ChangeIngredientEvent event,
+    Emitter<RecipeFormState> emit,
   ) {
     final ingredients = Map<int, String>.from(state.data.ingredients);
     ingredients[event.ingredientId] = event.value;
-    _output.add(
+    emit(
       FormDataChangedState(
         state.data.copyWith(
           ingredients: ingredients,
@@ -143,10 +113,11 @@ class RecipeFormBloc {
 
   void _onAddIngredientEvent(
     AddIngredientEvent event,
+    Emitter<RecipeFormState> emit,
   ) {
     final ingredients = Map<int, String>.from(state.data.ingredients);
     ingredients.addAll({event.ingredientId: ''});
-    _output.add(
+    emit(
       FormDataChangedState(
         state.data.copyWith(
           ingredients: ingredients,
@@ -157,10 +128,11 @@ class RecipeFormBloc {
 
   void _onDeleteIngredientEvent(
     DeleteIngredientEvent event,
+    Emitter<RecipeFormState> emit,
   ) {
     final ingredients = Map<int, String>.from(state.data.ingredients);
     ingredients.remove(event.ingredientId);
-    _output.add(
+    emit(
       FormDataChangedState(
         state.data.copyWith(
           ingredients: ingredients,
@@ -171,13 +143,14 @@ class RecipeFormBloc {
 
   void _onSaveRecipeEvent(
     SaveRecipeEvent event,
+    Emitter<RecipeFormState> emit,
   ) async {
-    _output.add(ShowLoadingState(state.data));
+    emit(ShowLoadingState(state.data));
     final failureOrSaved = await _createRecipeUseCase(event.recipe);
-    _output.add(CloseLoadingState(state.data));
+    emit(CloseLoadingState(state.data));
     failureOrSaved.fold(
-      () => _output.add(RecipeSavedState(state.data)),
-      (failure) => _output.add(
+      () => emit(RecipeSavedState(state.data)),
+      (failure) => emit(
         FormFailureState(
           state.data,
           message: failure.message,
@@ -188,23 +161,19 @@ class RecipeFormBloc {
 
   void _onUpdateRecipeEvent(
     UpdateRecipeEvent event,
+    Emitter<RecipeFormState> emit,
   ) async {
-    _output.add(ShowLoadingState(state.data));
+    emit(ShowLoadingState(state.data));
     final failureOrUpdated = await _updateRecipeUseCase(event.recipe);
-    _output.add(CloseLoadingState(state.data));
+    emit(CloseLoadingState(state.data));
     failureOrUpdated.fold(
-      () => _output.add(RecipeUpdatedState(state.data)),
-      (failure) => _output.add(
+      () => emit(RecipeUpdatedState(state.data)),
+      (failure) => emit(
         FormFailureState(
           state.data,
           message: failure.message,
         ),
       ),
     );
-  }
-
-  void dispose() {
-    _input.close();
-    _output.close();
   }
 }

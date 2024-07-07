@@ -55,7 +55,7 @@ class FormIngredientField extends StatelessWidget {
 
   void _onChangedIngredient(BuildContext context, {required String value}) {
     final formBloc = BlocInjector.of<RecipeFormBloc>(context);
-    formBloc.events.add(
+    formBloc.add(
       ChangeIngredientEvent(
         ingredientId: ingredientId,
         value: value,
@@ -66,11 +66,11 @@ class FormIngredientField extends StatelessWidget {
   void _onButtonPessed(BuildContext context) {
     final formBloc = BlocInjector.of<RecipeFormBloc>(context);
     if (isLast) {
-      formBloc.events.add(
+      formBloc.add(
         AddIngredientEvent(ingredientId + 1),
       );
     } else {
-      formBloc.events.add(
+      formBloc.add(
         DeleteIngredientEvent(ingredientId),
       );
     }

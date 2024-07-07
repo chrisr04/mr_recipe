@@ -14,14 +14,8 @@ class FormSaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formBloc = BlocInjector.of<RecipeFormBloc>(context);
-    return StreamBuilder(
-      stream: formBloc.stream,
-      initialData: formBloc.state,
-      builder: (context, snapshot) {
-        if (snapshot.data == null) return const SizedBox.shrink();
-        final state = snapshot.data!;
-
+    return BlocBuilder<RecipeFormBloc, RecipeFormState>(
+      builder: (context, state) {
         return SliverFillRemaining(
           hasScrollBody: false,
           child: Column(
@@ -68,11 +62,11 @@ class FormSaveButton extends StatelessWidget {
     );
 
     if (_isEdit) {
-      formBloc.events.add(
+      formBloc.add(
         UpdateRecipeEvent(recipe),
       );
     } else {
-      formBloc.events.add(
+      formBloc.add(
         SaveRecipeEvent(recipe),
       );
     }

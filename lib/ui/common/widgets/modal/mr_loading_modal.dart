@@ -12,7 +12,7 @@ class MrLoadingModal {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
-          surfaceTintColor: Theme.of(context).colorScheme.background,
+          surfaceTintColor: Theme.of(context).colorScheme.surface,
           child: const Padding(
             padding: EdgeInsets.all(MrSpacing.md),
             child: Column(

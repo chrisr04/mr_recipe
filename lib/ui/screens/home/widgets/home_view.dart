@@ -27,8 +27,8 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   void dispose() {
-    _homeBloc.events.add(const UnwatchRecipesEvent());
-    _homeBloc.dispose();
+    _homeBloc.add(const UnwatchRecipesEvent());
+    _homeBloc.close();
     super.dispose();
   }
 }

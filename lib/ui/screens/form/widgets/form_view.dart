@@ -46,7 +46,7 @@ class _FormViewState extends State<FormView> {
   @override
   void dispose() {
     _listenerSubscription?.cancel();
-    _formBloc.dispose();
+    _formBloc.close();
     super.dispose();
   }
 

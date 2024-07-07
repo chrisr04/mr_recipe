@@ -1,62 +1,43 @@
 import 'dart:async';
 import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/domain/domain.dart';
+import 'package:mr_recipe/ui/common/common.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
 
-class HomeBloc {
+class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(
     this._getRecipesUseCase,
     this._getRecipeWatcherUseCase,
     this._closeRecipeWatcherUseCase,
-  ) {
-    _output.add(state);
-    _output.stream.listen(_stateHandler);
-    _input.stream.listen(_eventHandler);
+  ) : super(const HomeInitialState()) {
+    register<LoadRecipesEvent>(_onLoadRecipesEvent);
+    register<WatchRecipesEvent>(_onWatchRecipesEvent);
+    register<UnwatchRecipesEvent>(_onUnwatchRecipesEvent);
   }
 
   final GetRecipesUseCase _getRecipesUseCase;
   final GetRecipeWatcherUseCase _getRecipeWatcherUseCase;
   final CloseRecipeWatcherUseCase _closeRecipeWatcherUseCase;
-
-  HomeState state = const HomeInitialState();
-  final StreamController<HomeEvent> _input = StreamController();
-  final StreamController<HomeState> _output = StreamController.broadcast();
   StreamSubscription<List<Recipe>>? _watcherSubscription;
 
-  Stream<HomeState> get stream => _output.stream;
-  StreamSink<HomeEvent> get events => _input.sink;
-
-  void _stateHandler(HomeState newState) {
-    state = newState;
-  }
-
-  void _eventHandler(HomeEvent event) {
-    switch (event) {
-      case LoadRecipesEvent():
-        _onLoadRecipesEvent(event);
-        break;
-      case WatchRecipesEvent():
-        _onWatchRecipesEvent(event);
-        break;
-      case UnwatchRecipesEvent():
-        _onUnwatchRecipesEvent(event);
-        break;
-      default:
-    }
-  }
-
-  void _onLoadRecipesEvent(LoadRecipesEvent event) async {
-    _output.add(const HomeLoadingState());
+  void _onLoadRecipesEvent(
+    LoadRecipesEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    emit(const HomeLoadingState());
     final failureOrRecipes = await _getRecipesUseCase();
     failureOrRecipes.fold(
-      (failure) => _output.add(HomeFailureState(failure.message)),
-      (recipes) => _output.add(HomeLoadedState(recipes)),
+      (failure) => emit(HomeFailureState(failure.message)),
+      (recipes) => emit(HomeLoadedState(recipes)),
     );
   }
 
-  void _onWatchRecipesEvent(WatchRecipesEvent event) {
+  void _onWatchRecipesEvent(
+    WatchRecipesEvent event,
+    Emitter<HomeState> emit,
+  ) {
     if (_watcherSubscription != null) return;
 
     final failureOrWatcher = _getRecipeWatcherUseCase();
@@ -65,24 +46,27 @@ class HomeBloc {
 
     if (failureOrWatcher.isLeft) {
       final failure = result as Failure;
-      _output.add(HomeFailureState(failure.message));
+      emit(HomeFailureState(failure.message));
       return;
     }
 
     final watcher = result as Stream<List<Recipe>>;
 
     _watcherSubscription = watcher.listen((recipes) {
-      _output.add(HomeLoadedState(recipes));
+      emit(HomeLoadedState(recipes));
     });
   }
 
-  void _onUnwatchRecipesEvent(UnwatchRecipesEvent event) async {
+  void _onUnwatchRecipesEvent(
+    UnwatchRecipesEvent event,
+    Emitter<HomeState> emit,
+  ) async {
     await _closeRecipeWatcherUseCase();
   }
 
-  void dispose() {
+  @override
+  void close() {
     _watcherSubscription?.cancel();
-    _input.close();
-    _output.close();
+    super.close();
   }
 }

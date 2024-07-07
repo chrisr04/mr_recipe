@@ -25,7 +25,7 @@ class FormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final formBloc = RecipeFormBlocDependency.of(context);
     return BlocInjector<RecipeFormBloc>(
-      bloc: formBloc..events.add(InitializeFormEvent(recipeId)),
+      bloc: formBloc..add(InitializeFormEvent(recipeId)),
       child: FormView(
         recipeId: recipeId,
       ),

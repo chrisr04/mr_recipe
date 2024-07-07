@@ -4,8 +4,8 @@ import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/domain/domain.dart';
 import 'package:mr_recipe/ui/common/common.dart';
 import 'package:mr_recipe/ui/navigation/navigation.dart';
-import 'package:mr_recipe/ui/screens/detail/bloc/recipe_detail_bloc.dart';
 import 'package:mr_recipe/ui/theme/theme.dart';
+import 'package:mr_recipe/ui/screens/detail/bloc/recipe_detail_bloc.dart';
 
 part 'helpers/detail_helpers.dart';
 part 'widgets/detail_view.dart';
@@ -25,10 +25,8 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final detailBloc = RecipeDetailBlocDependency.of(context);
     return BlocInjector<RecipeDetailBloc>(
-      bloc: detailBloc..events.add(LoadRecipeDetailEvent(recipeId)),
-      child: DetailView(
-        recipeId: recipeId,
-      ),
+      bloc: detailBloc..add(LoadRecipeDetailEvent(recipeId)),
+      child: const DetailView(),
     );
   }
 }
