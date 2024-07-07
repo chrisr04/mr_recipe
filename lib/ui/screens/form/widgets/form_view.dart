@@ -11,48 +11,34 @@ class FormView extends StatefulWidget {
 
 class _FormViewState extends State<FormView> {
   final _formKey = GlobalKey<FormState>();
-  late final _formBloc = BlocInjector.of<RecipeFormBloc>(context);
-  StreamSubscription<RecipeFormState>? _listenerSubscription;
-
-  @override
-  void didChangeDependencies() {
-    _listenerSubscription ??= _formBloc.stream.listen(_listenFormBloc);
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MrAppBar(
-        title: widget.recipeId.isEmpty
-            ? MrStrings.createRecipe
-            : MrStrings.editRecipe,
-      ),
-      body: CustomScrollView(
-        slivers: [
-          RecipeForm(
-            formKey: _formKey,
-            recipeId: widget.recipeId,
-          ),
-          FormSaveButton(
-            formKey: _formKey,
-            recipeId: widget.recipeId,
-          ),
-        ],
+    return BlocListener<RecipeFormBloc, RecipeFormState>(
+      listener: _listenFormBloc,
+      child: Scaffold(
+        appBar: MrAppBar(
+          title: widget.recipeId.isEmpty
+              ? MrStrings.createRecipe
+              : MrStrings.editRecipe,
+        ),
+        body: CustomScrollView(
+          slivers: [
+            RecipeForm(
+              formKey: _formKey,
+              recipeId: widget.recipeId,
+            ),
+            FormSaveButton(
+              formKey: _formKey,
+              recipeId: widget.recipeId,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  @override
-  void dispose() {
-    _listenerSubscription?.cancel();
-    _formBloc.close();
-    super.dispose();
-  }
-
-  void _listenFormBloc(RecipeFormState state) {
-    if (!context.mounted) return;
-
+  void _listenFormBloc(BuildContext context, RecipeFormState state) {
     switch (state) {
       case ShowLoadingState():
         MrLoadingModal.show(context);
