@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mr_recipe/ui/common/common.dart';
 
-class BlocInjector<T> extends StatefulWidget {
+class BlocInjector<T extends Bloc> extends StatefulWidget {
   const BlocInjector({
     super.key,
     required this.bloc,
@@ -20,18 +20,18 @@ class BlocInjector<T> extends StatefulWidget {
   State<BlocInjector> createState() => _BlocInjectorState<T>();
 }
 
-class _BlocInjectorState<T> extends State<BlocInjector> {
+class _BlocInjectorState<T extends Bloc> extends State<BlocInjector> {
   @override
   Widget build(BuildContext context) {
     return _BlocInherited<T>(
-      bloc: widget.bloc,
+      bloc: widget.bloc as T,
       child: widget.child,
     );
   }
 
   @override
   void dispose() {
-    if (widget.autoClose) (widget.bloc as Bloc).close();
+    if (widget.autoClose) widget.bloc.close();
     super.dispose();
   }
 }

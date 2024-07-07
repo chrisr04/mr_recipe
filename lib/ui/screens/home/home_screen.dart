@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/domain/domain.dart';
 import 'package:mr_recipe/ui/common/common.dart';
-import 'package:mr_recipe/ui/common/utils/bloc/widgets/bloc_injector.dart';
 import 'package:mr_recipe/ui/navigation/app_routes.dart';
 import 'package:mr_recipe/ui/screens/home/bloc/home_bloc.dart';
 
