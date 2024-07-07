@@ -3,24 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:mr_recipe/ui/common/utils/bloc/bloc.dart';
 import 'package:mr_recipe/ui/common/utils/bloc/types/bloc_types.dart';
 import 'package:mr_recipe/ui/common/utils/bloc/widgets/bloc_injector.dart';
+import 'package:mr_recipe/ui/common/utils/bloc/nested/nested.dart';
 
-class BlocListener<B extends Bloc, S> extends StatefulWidget {
+class BlocListener<B extends Bloc, S> extends SingleChildStatefulWidget {
   const BlocListener({
     super.key,
+    super.child,
     required this.listener,
     this.listenWhen,
-    this.child,
   });
 
   final BlocListenerHandler<S> listener;
   final BlocBuildCondition<S>? listenWhen;
-  final Widget? child;
 
   @override
-  State<BlocListener<B, S>> createState() => _BlocListenerState<B, S>();
+  SingleChildState<BlocListener<B, S>> createState() =>
+      _BlocListenerState<B, S>();
 }
 
-class _BlocListenerState<B extends Bloc, S> extends State<BlocListener<B, S>> {
+class _BlocListenerState<B extends Bloc, S>
+    extends SingleChildState<BlocListener<B, S>> {
   late final bloc = BlocInjector.of<B>(context);
   StreamSubscription? _blocSubscription;
 
@@ -33,8 +35,8 @@ class _BlocListenerState<B extends Bloc, S> extends State<BlocListener<B, S>> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return widget.child ?? const SizedBox.shrink();
+  Widget buildWithChild(BuildContext context, Widget? child) {
+    return child ?? const SizedBox.shrink();
   }
 
   @override

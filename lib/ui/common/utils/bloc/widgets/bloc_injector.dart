@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:mr_recipe/ui/common/common.dart';
+import 'package:mr_recipe/ui/common/utils/bloc/nested/nested.dart';
 
-class BlocInjector<B extends Bloc> extends StatefulWidget {
+class BlocInjector<B extends Bloc> extends SingleChildStatefulWidget {
   const BlocInjector({
     super.key,
+    super.child,
     required this.bloc,
-    required this.child,
     this.autoClose = true,
   });
 
-  final Widget child;
   final B bloc;
   final bool autoClose;
 
@@ -17,15 +17,16 @@ class BlocInjector<B extends Bloc> extends StatefulWidget {
       _BlocInherited.of<B>(context, listen);
 
   @override
-  State<BlocInjector> createState() => _BlocInjectorState<B>();
+  SingleChildState<BlocInjector> createState() => _BlocInjectorState<B>();
 }
 
-class _BlocInjectorState<B extends Bloc> extends State<BlocInjector> {
+class _BlocInjectorState<B extends Bloc>
+    extends SingleChildState<BlocInjector> {
   @override
-  Widget build(BuildContext context) {
+  Widget buildWithChild(BuildContext context, Widget? child) {
     return _BlocInherited<B>(
       bloc: widget.bloc as B,
-      child: widget.child,
+      child: child ?? const SizedBox.shrink(),
     );
   }
 
