@@ -14,7 +14,7 @@ class BlocInjector<T> extends StatefulWidget {
   final bool autoClose;
 
   static T of<T>(BuildContext context, {bool listen = false}) =>
-      _BlocInherited.of<T>(context, listen: listen);
+      _BlocInherited.of<T>(context, listen);
 
   @override
   State<BlocInjector> createState() => _BlocInjectorState<T>();
@@ -45,7 +45,7 @@ class _BlocInherited<T> extends InheritedWidget {
 
   final T bloc;
 
-  static T of<T>(BuildContext context, {bool listen = false}) => listen
+  static T of<T>(BuildContext context, bool listen) => listen
       ? context.dependOnInheritedWidgetOfExactType<_BlocInherited<T>>()!.bloc
       : context.findAncestorWidgetOfExactType<_BlocInherited<T>>()!.bloc;
 

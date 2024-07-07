@@ -14,9 +14,9 @@ class BlocConsumer<B extends Bloc, S> extends StatelessWidget {
   });
 
   final BlocListenerHandler<S> listener;
-  final BloBuildCondition<S>? listenWhen;
+  final BlocBuildCondition<S>? listenWhen;
   final BlocWidgetBuilder<S> builder;
-  final BloBuildCondition<S>? buildWhen;
+  final BlocBuildCondition<S>? buildWhen;
 
   @override
   Widget build(BuildContext context) {

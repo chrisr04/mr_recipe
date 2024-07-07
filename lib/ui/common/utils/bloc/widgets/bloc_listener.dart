@@ -13,7 +13,7 @@ class BlocListener<B extends Bloc, S> extends StatefulWidget {
   });
 
   final BlocListenerHandler<S> listener;
-  final BloBuildCondition<S>? listenWhen;
+  final BlocBuildCondition<S>? listenWhen;
   final Widget? child;
 
   @override

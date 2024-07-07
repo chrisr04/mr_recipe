@@ -9,4 +9,4 @@ typedef BlocListenerHandler<S> = void Function(BuildContext context, S state);
 
 typedef BlocWidgetBuilder<S> = Widget Function(BuildContext context, S state);
 
-typedef BloBuildCondition<S> = bool Function(S previous, S current);
+typedef BlocBuildCondition<S> = bool Function(S previous, S current);

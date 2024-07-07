@@ -1,5 +1,5 @@
-import 'package:mr_recipe/domain/domain.dart';
 import 'package:mr_recipe/data/data.dart';
+import 'package:mr_recipe/domain/domain.dart';
 import 'package:mr_recipe/ui/common/common.dart';
 import 'package:mr_recipe/core/managers/data_manager.dart';
 import 'package:mr_recipe/ui/screens/detail/bloc/recipe_detail_bloc.dart';

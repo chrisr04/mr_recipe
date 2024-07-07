@@ -12,7 +12,7 @@ class BlocBuilder<B extends Bloc, S> extends StatefulWidget {
   });
 
   final BlocWidgetBuilder<S> builder;
-  final BloBuildCondition<S>? buildWhen;
+  final BlocBuildCondition<S>? buildWhen;
 
   @override
   State<BlocBuilder<B, S>> createState() => _BlocBuilderState<B, S>();
