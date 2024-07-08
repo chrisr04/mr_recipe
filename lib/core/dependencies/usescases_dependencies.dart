@@ -1,4 +1,4 @@
-part of 'dependencies.dart';
+part of 'app_dependencies.dart';
 
 void usescasesDependencies() {
   inject.addSingleton<GetRecipeWatcherUseCase>(

@@ -24,13 +24,6 @@ abstract class Bloc<E, S> {
 
   @protected
   @mustCallSuper
-  void onMapEventToState(E event) async {
-    final eventHandler = _eventHandlers[event.runtimeType];
-    if (eventHandler != null) await eventHandler(event, _states.add);
-  }
-
-  @protected
-  @mustCallSuper
   void onChangeState(S newState) {
     _previousState = _currentState;
     _currentState = newState;
@@ -40,6 +33,13 @@ abstract class Bloc<E, S> {
   @mustCallSuper
   void register<T extends E>(EventHandler<T, S> eventHandler) {
     _eventHandlers[T] = eventHandler;
+  }
+
+  @protected
+  @mustCallSuper
+  void onMapEventToState(E event) async {
+    final eventHandler = _eventHandlers[event.runtimeType];
+    if (eventHandler != null) await eventHandler(event, _states.add);
   }
 
   void add(E event) {

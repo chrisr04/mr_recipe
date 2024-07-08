@@ -7,11 +7,11 @@ class BlocInjector<B extends Bloc> extends SingleChildStatefulWidget {
     super.key,
     super.child,
     required this.bloc,
-    this.autoClose = true,
+    this.closeOnDispose = true,
   });
 
   final B bloc;
-  final bool autoClose;
+  final bool closeOnDispose;
 
   static B of<B extends Bloc>(BuildContext context, {bool listen = false}) =>
       _BlocInherited.of<B>(context, listen);
@@ -32,7 +32,7 @@ class _BlocInjectorState<B extends Bloc>
 
   @override
   void dispose() {
-    if (widget.autoClose) widget.bloc.close();
+    if (widget.closeOnDispose) widget.bloc.close();
     super.dispose();
   }
 }

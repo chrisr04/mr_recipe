@@ -14,10 +14,12 @@ part 'usescases_dependencies.dart';
 
 final inject = Injector.inject;
 
-void initDependencies() {
-  coreDependencies();
-  datasourceDependencies();
-  repositoryDependencies();
-  usescasesDependencies();
-  blocDependencies();
+abstract class AppDependencies {
+  static void init() {
+    coreDependencies();
+    datasourceDependencies();
+    repositoryDependencies();
+    usescasesDependencies();
+    blocDependencies();
+  }
 }

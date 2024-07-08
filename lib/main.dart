@@ -3,7 +3,7 @@ import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/ui/ui.dart';
 
 void main() {
-  initDependencies();
+  AppDependencies.init();
   runApp(const MainApp());
 }
 

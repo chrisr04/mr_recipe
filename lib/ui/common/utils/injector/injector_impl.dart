@@ -6,8 +6,8 @@ class _InjectorImpl implements Injector {
   static final _instance = _InjectorImpl._();
   factory _InjectorImpl() => _instance;
 
-  final _typedServices = <Type, dynamic>{};
-  final _namedServices = <String, dynamic>{};
+  final _typedServices = <Type, Service>{};
+  final _namedServices = <String, Service>{};
 
   T call<T>({String? name}) {
     if (name != null) {
