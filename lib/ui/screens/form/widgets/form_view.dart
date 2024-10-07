@@ -14,8 +14,8 @@ class _FormViewState extends State<FormView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<RecipeFormBloc, RecipeFormState>(
-      listener: _listenFormBloc,
+    return BlocObserver<RecipeFormBloc, RecipeFormState>(
+      observer: _listenFormBloc,
       child: Scaffold(
         appBar: MrAppBar(
           title: widget.recipeId.isEmpty

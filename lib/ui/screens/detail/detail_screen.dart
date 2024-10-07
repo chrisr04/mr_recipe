@@ -6,6 +6,7 @@ import 'package:mr_recipe/ui/common/common.dart';
 import 'package:mr_recipe/ui/navigation/navigation.dart';
 import 'package:mr_recipe/ui/theme/theme.dart';
 import 'package:mr_recipe/ui/screens/detail/bloc/recipe_detail_bloc.dart';
+import 'package:reactor/reactor.dart';
 
 part 'helpers/detail_helpers.dart';
 part 'widgets/detail_view.dart';
@@ -24,7 +25,8 @@ class DetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocInjector<RecipeDetailBloc>(
-      bloc: inject<RecipeDetailBloc>()..add(LoadRecipeDetailEvent(recipeId)),
+      create: (context) =>
+          inject<RecipeDetailBloc>()..add(LoadRecipeDetailEvent(recipeId)),
       child: const DetailView(),
     );
   }

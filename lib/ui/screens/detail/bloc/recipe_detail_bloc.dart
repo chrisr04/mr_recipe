@@ -1,5 +1,5 @@
 import 'package:mr_recipe/domain/domain.dart';
-import 'package:mr_recipe/ui/common/common.dart';
+import 'package:reactor/reactor.dart';
 
 part 'recipe_detail_event.dart';
 part 'recipe_detail_state.dart';

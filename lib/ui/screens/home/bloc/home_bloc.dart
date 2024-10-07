@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:mr_recipe/core/core.dart';
 import 'package:mr_recipe/domain/domain.dart';
-import 'package:mr_recipe/ui/common/common.dart';
+import 'package:reactor/reactor.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -65,8 +65,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   @override
-  void close() {
+  Future<void> close() async {
     _watcherSubscription?.cancel();
-    super.close();
+    return super.close();
   }
 }

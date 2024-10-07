@@ -9,8 +9,8 @@ class DetailView extends StatelessWidget {
       appBar: const MrAppBar(
         title: MrStrings.detail,
       ),
-      body: BlocConsumer<RecipeDetailBloc, RecipeDetailState>(
-        listener: _listenDetailBloc,
+      body: BlocReactor<RecipeDetailBloc, RecipeDetailState>(
+        observer: _listenDetailBloc,
         builder: (context, state) {
           return switch (state) {
             DetailLoadedState() => RecipeContent(
