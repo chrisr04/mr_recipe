@@ -66,7 +66,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Future<void> close() async {
-    _watcherSubscription?.cancel();
+    await _watcherSubscription?.cancel();
     return super.close();
   }
 }
