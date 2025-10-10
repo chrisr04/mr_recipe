@@ -18,11 +18,11 @@ final theme = ThemeData(
     surface: MrColors.white,
     onSurface: MrColors.black,
     tertiary: MrColors.camel,
-    shadow: MrColors.black.withOpacity(0.2),
+    shadow: MrColors.black.withValues(alpha: 0.2),
     outline: MrColors.silver,
     outlineVariant: MrColors.chineseSilver,
   ),
-  cardTheme: const CardTheme(
+  cardTheme: const CardThemeData(
     surfaceTintColor: MrColors.white,
   ),
   textTheme: const TextTheme(
@@ -75,7 +75,7 @@ final theme = ThemeData(
   appBarTheme: AppBarTheme(
     scrolledUnderElevation: 0.0,
     systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: MrColors.black.withOpacity(0.1),
+      statusBarColor: MrColors.black.withValues(alpha: 0.1),
       statusBarIconBrightness: Brightness.light,
     ),
   ),
