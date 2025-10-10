@@ -12,7 +12,7 @@ dependencies:
   reactor:
     git:
       url: https://github.com/chrisr04/reactor
-      ref: v0.0.11
+      ref: v0.0.12
   inject:
     git:
       url: https://github.com/chrisr04/inject
